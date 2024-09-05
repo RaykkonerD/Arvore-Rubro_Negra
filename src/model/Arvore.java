@@ -11,11 +11,11 @@ public class Arvore {
         this.raiz = raiz;
     }
 
-    public Arvore(int raiz){
+    public Arvore(int raiz) {
         this.raiz = new Nodo(raiz);
     }
 
-    public void inserir(int valor){
+    public void inserir(int valor) {
         if (this.raiz == null) {
             this.raiz = new Nodo(valor);
         } else if (!buscar(valor)) {
@@ -23,26 +23,26 @@ public class Arvore {
         }
     }
 
-    public void inserir(Nodo nodo, int valor){
-        if(valor < nodo.getValor()){
-            if(nodo.getEsquerda() == null){
+    public void inserir(Nodo nodo, int valor) {
+        if (valor < nodo.getValor()) {
+            if (nodo.getEsquerda() == null) {
                 Nodo novoNodo = new Nodo(valor);
                 novoNodo.setRubro(true);
                 novoNodo.setPai(nodo);
                 nodo.setEsquerda(novoNodo);
-                if(nodo.isRubro()){
+                if (nodo.isRubro()) {
                     ajustarAEsquerda(nodo, valor);
                 }
             } else {
                 inserir(nodo.getEsquerda(), valor);
             }
         } else {
-            if(nodo.getDireita() == null){
+            if (nodo.getDireita() == null) {
                 Nodo novoNodo = new Nodo(valor);
                 novoNodo.setRubro(true);
                 novoNodo.setPai(nodo);
                 nodo.setDireita(novoNodo);
-                if(nodo.isRubro()) {
+                if (nodo.isRubro()) {
                     ajustarADireita(nodo, valor);
                 }
             } else {
@@ -51,33 +51,37 @@ public class Arvore {
         }
     }
 
-    public void ajustarAEsquerda(Nodo nodo, int valor){
+    public void ajustarAEsquerda(Nodo nodo, int valor) {
         Nodo tio = (nodo == nodo.getPai().getEsquerda()) ? nodo.getPai().getDireita() : nodo.getPai().getEsquerda();
-        if(tio != null) {
+        if (tio != null) {
             if (tio.isRubro()) {
+                tio.setRubro(false);
                 recolorir(nodo);
             }
-        }
-
-        if(nodo == nodo.getPai().getEsquerda()){
-            rotacaoADireita(nodo.getPai());
         } else {
-            // Rotação R-L
+
+            if (nodo == nodo.getPai().getEsquerda()) {
+                rotacaoADireita(nodo.getPai());
+            } else {
+                // Rotação R-L
+            }
         }
     }
 
-    public void ajustarADireita(Nodo nodo, int valor){
+    public void ajustarADireita(Nodo nodo, int valor) {
         Nodo tio = (nodo == nodo.getPai().getEsquerda()) ? nodo.getPai().getDireita() : nodo.getPai().getEsquerda();
-        if(tio != null) {
+        if (tio != null) {
             if (tio.isRubro()) {
+                tio.setRubro(false);
                 recolorir(nodo);
             }
-        }
-
-        if(nodo == nodo.getPai().getDireita()){
-            rotacaoAEsquerda(nodo.getPai());
         } else {
-            // Rotação L-R
+
+            if (nodo == nodo.getPai().getDireita()) {
+                rotacaoAEsquerda(nodo.getPai());
+            } else {
+                // Rotação L-R
+            }
         }
     }
 
@@ -92,8 +96,10 @@ public class Arvore {
             }
 
             nodo.setEsquerda(aDireita);
+            nodo.setRubro(this.raiz.isRubro());
             nodo.setPai(this.raiz);
             this.raiz.setDireita(nodo);
+            this.raiz.setRubro(false);
         } else {
             nodo.getEsquerda().setPai(nodo.getPai());
             if (nodo.getPai().getEsquerda() == nodo) {
@@ -120,6 +126,7 @@ public class Arvore {
             nodo.setDireita(aEsquerda);
             nodo.setPai(this.raiz);
             this.raiz.setEsquerda(nodo);
+            this.raiz.setRubro(false);
         } else {
             nodo.getDireita().setPai(nodo.getPai());
             if (nodo.getPai().getDireita() == nodo) {
@@ -133,8 +140,8 @@ public class Arvore {
         }
     }
 
-    public void recolorir(Nodo nodo){
-        if(nodo == this.raiz){
+    public void recolorir(Nodo nodo) {
+        if (nodo == this.raiz) {
             this.raiz.setRubro(false);
             return;
         }
