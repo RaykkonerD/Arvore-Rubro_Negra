@@ -31,7 +31,7 @@ public class Arvore {
                 novoNodo.setPai(nodo);
                 nodo.setEsquerda(novoNodo);
                 if(nodo.isRubro()){
-                    recolorir(nodo);
+                    ajustarAEsquerda(nodo, valor);
                 }
             } else {
                 inserir(nodo.getEsquerda(), valor);
@@ -42,12 +42,42 @@ public class Arvore {
                 novoNodo.setRubro(true);
                 novoNodo.setPai(nodo);
                 nodo.setDireita(novoNodo);
-                if(nodo.isRubro()){
-                    recolorir(nodo);
+                if(nodo.isRubro()) {
+                    ajustarADireita(nodo, valor);
                 }
             } else {
                 inserir(nodo.getDireita(), valor);
             }
+        }
+    }
+
+    public void ajustarAEsquerda(Nodo nodo, int valor){
+        Nodo tio = (nodo == nodo.getPai().getEsquerda()) ? nodo.getPai().getDireita() : nodo.getPai().getEsquerda();
+        if(tio != null) {
+            if (tio.isRubro()) {
+                recolorir(nodo);
+            }
+        }
+
+        if(nodo == nodo.getPai().getEsquerda()){
+            // Rotação R-L
+        } else {
+            // Rotação L
+        }
+    }
+
+    public void ajustarADireita(Nodo nodo, int valor){
+        Nodo tio = (nodo == nodo.getPai().getEsquerda()) ? nodo.getPai().getDireita() : nodo.getPai().getEsquerda();
+        if(tio != null) {
+            if (tio.isRubro()) {
+                recolorir(nodo);
+            }
+        }
+
+        if(nodo == nodo.getPai().getEsquerda()){
+            // Rotação L-R
+        } else {
+            // Rotação R
         }
     }
 
