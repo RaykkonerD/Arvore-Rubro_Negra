@@ -1,5 +1,5 @@
 import model.Arvore;
-import util.ApresentaArvore;
+import ApresentaArvore;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,7 +7,6 @@ public class Main {
         arvore.inserir(14);
         arvore.inserir(10);
 
-        System.out.println(arvore.getRaiz().getEsquerda());
         ApresentaArvore.execute(arvore);
     }
 }

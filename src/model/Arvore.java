@@ -60,9 +60,9 @@ public class Arvore {
         }
 
         if(nodo == nodo.getPai().getEsquerda()){
-            // Rotação R-L
+            rotacaoADireita(nodo.getPai());
         } else {
-            // Rotação L
+            // Rotação R-L
         }
     }
 
@@ -74,10 +74,62 @@ public class Arvore {
             }
         }
 
-        if(nodo == nodo.getPai().getEsquerda()){
-            // Rotação L-R
+        if(nodo == nodo.getPai().getDireita()){
+            rotacaoAEsquerda(nodo.getPai());
         } else {
-            // Rotação R
+            // Rotação L-R
+        }
+    }
+
+    private void rotacaoADireita(Nodo nodo) {
+        if (this.raiz == nodo) {
+            this.raiz = nodo.getEsquerda();
+            this.raiz.setPai(null);
+            Nodo aDireita = this.raiz.getDireita();
+
+            if (aDireita != null) {
+                aDireita.setPai(nodo);
+            }
+
+            nodo.setEsquerda(aDireita);
+            nodo.setPai(this.raiz);
+            this.raiz.setDireita(nodo);
+        } else {
+            nodo.getEsquerda().setPai(nodo.getPai());
+            if (nodo.getPai().getEsquerda() == nodo) {
+                nodo.getPai().setEsquerda(nodo.getEsquerda());
+            } else {
+                nodo.getPai().setDireita(nodo.getEsquerda());
+            }
+            nodo.setPai(nodo.getEsquerda());
+            nodo.setEsquerda(nodo.getEsquerda().getDireita());
+            nodo.getPai().setDireita(nodo);
+        }
+    }
+
+    private void rotacaoAEsquerda(Nodo nodo) {
+        if (this.raiz == nodo) {
+            this.raiz = nodo.getDireita();
+            this.raiz.setPai(null);
+            Nodo aEsquerda = this.raiz.getEsquerda();
+
+            if (aEsquerda != null) {
+                aEsquerda.setPai(nodo);
+            }
+
+            nodo.setDireita(aEsquerda);
+            nodo.setPai(this.raiz);
+            this.raiz.setEsquerda(nodo);
+        } else {
+            nodo.getDireita().setPai(nodo.getPai());
+            if (nodo.getPai().getDireita() == nodo) {
+                nodo.getPai().setDireita(nodo.getDireita());
+            } else {
+                nodo.getPai().setEsquerda(nodo.getDireita());
+            }
+            nodo.setPai(nodo.getDireita());
+            nodo.setDireita(nodo.getDireita().getEsquerda());
+            nodo.getPai().setEsquerda(nodo);
         }
     }
 

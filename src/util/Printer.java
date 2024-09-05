@@ -4,7 +4,7 @@ import model.Nodo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApresentaArvore {
+public class Printer {
 
     private static final String RED = "\033[31m";
     private static final String RESET = "\033[0m";
