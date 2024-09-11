@@ -59,11 +59,12 @@ public class Arvore {
                 recolorir(nodo);
             }
         } else {
-
             if (nodo == nodo.getPai().getEsquerda()) {
                 rotacaoADireita(nodo.getPai());
             } else {
-                // Rotação R-L
+                rotacaoADireita(nodo);
+                rotacaoAEsquerda(nodo.getPai().getPai());
+                recolorir(nodo.getPai().getEsquerda());
             }
         }
     }
@@ -76,11 +77,12 @@ public class Arvore {
                 recolorir(nodo);
             }
         } else {
-
             if (nodo == nodo.getPai().getDireita()) {
                 rotacaoAEsquerda(nodo.getPai());
             } else {
-                // Rotação L-R
+                rotacaoAEsquerda(nodo);
+                rotacaoADireita(nodo.getPai().getPai());
+                recolorir(nodo.getPai().getDireita());
             }
         }
     }

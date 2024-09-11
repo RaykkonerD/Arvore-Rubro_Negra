@@ -2,7 +2,7 @@ package model;
 
 public class Nodo {
     private int valor;
-    private boolean cor; // FALSE = NEGRO; TRUE = RUBRO
+    private boolean rubro; // FALSE = NEGRO; TRUE = RUBRO
     private Nodo filhoEsquerda;
     private Nodo filhoDireita;
     private Nodo pai;
@@ -44,10 +44,10 @@ public class Nodo {
     }
 
     public boolean isRubro() {
-        return cor;
+        return rubro;
     }
 
-    public void setRubro(boolean cor) {
-        this.cor = cor;
+    public void setRubro(boolean rubro) {
+        this.rubro = rubro;
     }
 }

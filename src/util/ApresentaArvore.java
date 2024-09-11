@@ -34,7 +34,7 @@ public class ApresentaArvore {
                 } else {
                     String value = String.valueOf(n.getValor());
                     line.add((n.isRubro() ? RED : BLACK) + value + RESET);
-                    if (value.length() > widest) widest = value.length();
+                    if (value.length() > widest) widest = value.length() - value.indexOf("m") + 1 - RESET.length();
 
                     next.add(n.getEsquerda());
                     next.add(n.getDireita());
