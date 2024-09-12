@@ -53,36 +53,44 @@ public class Arvore {
 
     public void ajustarAEsquerda(Nodo nodo, int valor) {
         Nodo tio = (nodo == nodo.getPai().getEsquerda()) ? nodo.getPai().getDireita() : nodo.getPai().getEsquerda();
-        if (tio != null) {
-            if (tio.isRubro()) {
-                tio.setRubro(false);
-                recolorir(nodo);
-            }
+        if (tio != null && tio.isRubro()) {
+            tio.setRubro(false);
+            recolorir(nodo);
         } else {
             if (nodo == nodo.getPai().getEsquerda()) {
                 rotacaoADireita(nodo.getPai());
+                //     (10)            
+                //   (8) [nodo]    ->     (8) [nodo]
+                // (5)                  (5) (10)
+                recolorir(nodo);
             } else {
+                // (10)                   (10)
+                //    (13) [nodo]    ->      (11) [nodo]
+                // (11)                          (13)     
                 rotacaoADireita(nodo);
+                // (10)
+                //    (11) [nodo]    ->     (11) [nodo]
+                //      (13)             (10)  (13)
+                recolorir(nodo);
                 rotacaoAEsquerda(nodo.getPai().getPai());
-                recolorir(nodo.getPai().getEsquerda());
             }
         }
     }
 
     public void ajustarADireita(Nodo nodo, int valor) {
         Nodo tio = (nodo == nodo.getPai().getEsquerda()) ? nodo.getPai().getDireita() : nodo.getPai().getEsquerda();
-        if (tio != null) {
-            if (tio.isRubro()) {
-                tio.setRubro(false);
-                recolorir(nodo);
-            }
+        if (tio != null && tio.isRubro()) {
+            tio.setRubro(false);
+            recolorir(nodo);
+
         } else {
             if (nodo == nodo.getPai().getDireita()) {
                 rotacaoAEsquerda(nodo.getPai());
+                recolorir(nodo);
             } else {
                 rotacaoAEsquerda(nodo);
+                recolorir(nodo.getPai());
                 rotacaoADireita(nodo.getPai().getPai());
-                recolorir(nodo.getPai().getDireita());
             }
         }
     }

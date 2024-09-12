@@ -8,8 +8,8 @@ public class Main {
         arvore.inserir(5);
         arvore.inserir(22);
         arvore.inserir(7);
-        arvore.inserir(8);
-        arvore.inserir(9);
+        // arvore.inserir(8);
+        // arvore.inserir(9);
 
         ApresentaArvore.execute(arvore);
     }

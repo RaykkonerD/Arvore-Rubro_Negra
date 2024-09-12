@@ -6,9 +6,8 @@ import java.util.List;
 
 public class ApresentaArvore {
 
-    private static final String RED = "\033[31m";
-    private static final String BLACK = "\033[0;90m";
-    private static final String RESET = "\033[0m";
+    private static final String RED = "\033[31m  ";
+    private static final String RESET = "\033[0m   ";
 
     public static void execute(Arvore arvore) {
         if (arvore == null || arvore.getRaiz() == null) {
@@ -33,8 +32,8 @@ public class ApresentaArvore {
                     next.add(null);
                 } else {
                     String value = String.valueOf(n.getValor());
-                    line.add((n.isRubro() ? RED : BLACK) + value + RESET);
-                    if (value.length() > widest) widest = value.length() - value.indexOf("m") + 1 - RESET.length();
+                    line.add(n.isRubro() ? RED + value + RESET : value);
+                    if (value.length() > widest) widest = value.length();
 
                     next.add(n.getEsquerda());
                     next.add(n.getDireita());
@@ -91,9 +90,8 @@ public class ApresentaArvore {
             for (int j = 0; j < line.size(); j++) {
                 String f = line.get(j);
                 if (f == null) f = "";
-                int gap1 = (int) Math.ceil(perpiece / 2f);
-                int gap2 = (int) (gap1 / 2f - f.length() / 2f);
-                // int gap2 = (int) (gap1 * 3 - f.length() - 1);
+                int gap1 = (int) Math.ceil(perpiece / 2f - f.length() / 2f);
+                int gap2 = (int) Math.floor(perpiece / 2f - f.length() / 2f);
 
                 for (int k = 0; k < gap1; k++) {
                     System.out.print(" ");
