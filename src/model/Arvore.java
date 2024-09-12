@@ -59,19 +59,12 @@ public class Arvore {
         } else {
             if (nodo == nodo.getPai().getEsquerda()) {
                 rotacaoADireita(nodo.getPai());
-                //     (10)            
-                //   (8) [nodo]    ->     (8) [nodo]
-                // (5)                  (5) (10)
-                recolorir(nodo);
-            } else {
-                // (10)                   (10)
-                //    (13) [nodo]    ->      (11) [nodo]
-                // (11)                          (13)     
+                nodo.setRubro(false);
+                nodo.getDireita().setRubro(true);
+            } else { 
                 rotacaoADireita(nodo);
-                // (10)
-                //    (11) [nodo]    ->     (11) [nodo]
-                //      (13)             (10)  (13)
-                recolorir(nodo);
+                nodo.getPai().setRubro(false);
+                nodo.getPai().getPai().setRubro(true);
                 rotacaoAEsquerda(nodo.getPai().getPai());
             }
         }
@@ -82,14 +75,15 @@ public class Arvore {
         if (tio != null && tio.isRubro()) {
             tio.setRubro(false);
             recolorir(nodo);
-
         } else {
             if (nodo == nodo.getPai().getDireita()) {
                 rotacaoAEsquerda(nodo.getPai());
-                recolorir(nodo);
+                nodo.setRubro(false);
+                nodo.getEsquerda().setRubro(true);
             } else {
                 rotacaoAEsquerda(nodo);
-                recolorir(nodo.getPai());
+                nodo.getPai().setRubro(false);
+                nodo.getPai().getPai().setRubro(true);
                 rotacaoADireita(nodo.getPai().getPai());
             }
         }
